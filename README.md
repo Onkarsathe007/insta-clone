@@ -10,7 +10,7 @@ This is a basic Instagram clone built using Node.js, Express, and other web tech
 ## Screenshots
 
 ### Screenshot 1
-![Screenshot 1](./screenshot1.png)
+![Screenshot 1](./screenshot.png)
 
 ### Screenshot 2
 ![Screenshot 2](./screenshot2.png)
