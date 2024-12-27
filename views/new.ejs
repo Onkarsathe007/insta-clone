@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Create Post</title>
+</head>
+<body>
+    <div class="form-container">
+    <form action="/home/new" method="post">
+        <h1>Create new post</h1>
+        <label for="username">Enter Username :</label>
+        <input type="text" name="username" id="username">
+        <br><br>
+        <label for="imglink">Enter Image link :</label>
+        <input type="text" name="imgLink" id="imgLink" placeholder="https://www.imagelink.xyz">
+        <br><br>
+        <label for="caption">Enter Your Caption:</label>
+        <br>
+        <textarea name="caption" id="caption" cols="50px" rows="7"></textarea>
+        
+        <br><input type="submit" value="Submit">
+    </form>
+    </div>
+</body>
+</html>

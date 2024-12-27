@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Home</title>
+</head>
+<body>
+    <div class="header">
+        <div class="icon"><img src="/css/image.png" alt="icon"></div>
+        <input type="text" name="search" id="search" placeholder="Search">
+        <div class="right-icons">
+            <i id="house" class="fa-solid fa-house"></i>
+            <i id="message" class="fa-regular fa-message"></i>
+            <i id="heart" class="fa-regular fa-heart"></i>
+            <i class="fa-solid fa-user"></i>
+        </div>
+    </div>
+    <div class="container">
+        <% for(post of posts) { %>
+        <div class="post">
+            <div class="post-header">
+                <div class="profile-pic"><img src="" alt=""></div>
+                <span class="username"><%= post.username %> <i style="color: rgb(117, 117, 251);" class="fa-solid fa-certificate"></i></span>
+            </div>
+            <img src="<%= post.img %>" alt="Post Image" class="post-image">
+            <div class="post-footer">
+                <div class="icons">
+                    <i class="fa-regular fa-heart" ></i>
+                    <i class="fa-solid fa-comment"></i>
+                    <i class="fa-solid fa-share"></i>
+                </div>
+                <div class="likes"><%=post.likeCount %> likes</div>
+                <div class="caption"><%=post.caption%></div>
+                <a href="">
+                    <div class="comments">View all <%= post.commentCount %> comments</div>
+                </a>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <div class="foot"><a href="/home/new"><i class="fa-solid fa-plus"></i></a></div>
+</body>
+</html>
