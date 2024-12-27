@@ -15,6 +15,9 @@ This is a basic Instagram clone built using Node.js, Express, and other web tech
 ### Screenshot 2
 ![Screenshot 2](./screenshot2.png)
 
+### Screenshot 2
+![Screenshot 2](./screenshot3.png)
+
 ## Project Structure
 ```
 ├── node_modules      # Installed dependencies
