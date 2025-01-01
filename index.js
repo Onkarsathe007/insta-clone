@@ -2,10 +2,14 @@ const express = require("express");
 const app = express();
 const { v4: uuid } = require('uuid'); 
 let port = 8080;
+//Mysql database.
+const mysql = require("mysql2");
 
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 
 // for handelling the post requests :
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 //Starting server
 app.listen(port,(req,res)=>{        //listening for request 
     console.log(`Server started on port ${port}.`);
@@ -13,6 +17,7 @@ app.listen(port,(req,res)=>{        //listening for request
 
 app.set("view engine","ejs");
 const path = require("path");       //defining the path for the view
+const { error } = require("console");
 app.set("views",path.join(__dirname,"/views"));
 
 app.use(express.static(path.join(__dirname,"public")));   //for the static files
@@ -62,4 +67,56 @@ app.post("/home/new",(req,res)=>{
 
     posts.push({id,username,img,caption,likeCount,commentCount});
     res.redirect("/home")
+});
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '123',
+    database: 'instagram',
+  });
+
+app.get("/",(req,res)=>{
+    res.render("login.ejs")
+});
+
+app.get("/signup",(req,res)=>{
+    res.render("signup.ejs")
+});
+
+//for string the data into database.
+app.post("/signup",(req,res)=>{
+    let query = "INSERT INTO user VALUES (?,?,?,?)";
+    const { username, password, fullname, Username } = req.body;
+try{
+    connection.query(query,[username, password, fullname, Username],(err,result)=>{
+        if(err) throw err;
+        res.send(result);  // here redirect to the login page.
+    });
+}catch(error){
+    res.send("Error : ",err);
+}
+});
+
+app.post("/login",(req,res)=>{
+    const { username,password } = req.body;
+    // console.log("User Name is :",username);
+    // console.log("and Password is :",password);
+    let query = "SELECT * FROM user WHERE username = ?";
+    try{
+        connection.query(query,[username],(err,result)=>{
+            if(err) throw err;
+            // res.send(result);
+            if(result[0].username == username && result[0].password == password)
+            {
+                //redirect the the user to the home page
+                res.send("User Found in DB");
+            }else{
+                res.send("No user found ")
+            }
+        })
+    }catch(err)
+    {
+        res.send("Error : ",err," occured");
+    }
 })
